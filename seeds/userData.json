@@ -1,0 +1,17 @@
+[
+    {
+        "name":"Sarah",
+        "email":"sarah@gmail.com",
+        "password":"testing123"
+    },
+    {
+        "name":"Daisy",
+        "email":"daisy@meowmail.com",
+        "password":"testing123"
+    },
+    {
+        "name":"Pearl",
+        "email":"pearl@meowmail.com",
+        "password":"testing123"
+    }
+]
