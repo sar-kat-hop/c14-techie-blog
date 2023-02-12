@@ -1,4 +1,31 @@
-<h2>Login</h2>
+<div class="jumbotron">
+    <h1 class="display-3">Welcome to Present Pear!</h1>
+        <p class="lead">Login or create an account to view your wishlists and groups.</p>
+    <hr class="my-2">
+        {{!-- <p>Enter your username and password:</p> --}}
+        <form id="login-form">
+            <div class="form-group row">
+                <label for="login-email" class="col-sm-2 col-form-label">Email</label>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control" id="login-email" placeholder="email@example.com">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="login-password" class="col-sm-2 col-form-label">Password</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="login-password" placeholder="password">
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-10 offset-sm-2">
+                    <button type="submit" class="btn btn-primary mb-2" id="login-btn">Log in</button>
+                </div>
+            </div>
+        </form>
+
+</div>
+
+{{!-- <h2>Login</h2>
 
 <form class="form login-form">
     <div class="form-group">
@@ -12,6 +39,6 @@
     <div class="form-group">
         <button class="btn btn-primary" type="submit">login</button>
     </div>
-</form>
+</form> --}}
 
 <script src="../public/js/login.js"></script>

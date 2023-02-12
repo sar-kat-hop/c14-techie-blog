@@ -19,11 +19,18 @@ Comment.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
-        user_id: {
-            type: DataTypes.INTEGER,
+        // user_id: {
+        //     type: DataTypes.INTEGER,
+        //     references: {
+        //         model: 'user',
+        //         key: 'id',
+        //     },
+        // },
+        user_name: {
+            type: DataTypes.STRING,
             references: {
                 model: 'user',
-                key: 'id',
+                key: 'name',
             },
         },
         date_created: {
@@ -37,7 +44,7 @@ Comment.init(
         timestamps: false,
         freezeTableName: true,
         underscored: true,
-        modelName: 'Comment',
+        modelName: 'comment',
     }
 );
 
