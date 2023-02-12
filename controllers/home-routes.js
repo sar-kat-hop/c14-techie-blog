@@ -5,11 +5,6 @@ const userAuth = require('../utils/auth');
 // get all comments on homepage for logged-in user only
 router.get('/', userAuth, async (req, res) => {
     try {
-        // const userData = await User.findAll({
-        //     attributes: {exclude: ['password'] },
-        //     order: [['name', 'ASC']],
-        // });
-
         const commentData = await Comment.findAll({
             include: [
                 {

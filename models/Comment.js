@@ -40,3 +40,5 @@ Comment.init(
         modelName: 'Comment',
     }
 );
+
+module.exports = Comment;
