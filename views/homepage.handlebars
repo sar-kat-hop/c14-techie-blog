@@ -1,0 +1,16 @@
+{{!-- loop over each comment --}}
+{{#each comments as |comment| }}
+<div class="container">
+    <div class="list-group">
+        {{!-- render comments ... want to sort by date created, ideally --}}
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{comment.title}}</h5>
+            <small>{{comment.date_created}}</small>
+        </div>
+        <p class="mb-1">{{comment.body}}</p>
+        <small>{{comment.user_name}}</small>
+    </div>
+</div>
+{{/each}}
+
+{{!-- need to add btn to add new comment ... redirect to new page or render on homepage somehow? add here or on main.handlebars? also need to add code for routing to do this --}}
