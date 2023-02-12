@@ -1,34 +1,43 @@
 const router = require('express').Router();
-const { User } = require('../models');
+const { User, Comment } = require('../models');
 const userAuth = require('../utils/auth');
 
-// user can't view homepage w/o being logged in
+// get all comments on homepage for logged-in user only
 router.get('/', userAuth, async (req, res) => {
     try {
-        const userData = await User.findAll({
-            attributes: { exclude: ['password'] },
-            order: [[ 'name', 'ASC' ]],
+        // const userData = await User.findAll({
+        //     attributes: {exclude: ['password'] },
+        //     order: [['name', 'ASC']],
+        // });
+
+        const commentData = await Comment.findAll({
+            include: [
+                {
+                model: User,
+                attributes: ['user_name', 'date_created'],
+                },
+            ],
         });
 
-        const users = userData.map(( info ) => info.get({ plain: true })); 
-
-        res.render('homepage', {
-            users,
-            logged_in: req.session.logged_in,
-        });
-    } catch (err) {
-        res.status(500),json(err);
-        console.log(err);
-    }
+        const comments = commentData.map((comment) => 
+            comment.get({ plain: true })
+            );
+            res.render('homepage', {
+                comments,
+                logged_in: req.session.logged_in,
+            });
+        } catch (err) {
+            res.status(500).json(err);
+            console.log(err);
+        }
 });
 
 router.get('/login', (req, res) => {
-    // if there's already a session, send req to homepage
+    // if there's already active session, send req to homepage
     if (req.session.logged_in) {
         res.redirect('/');
         return;
     }
-
     res.render('login');
 });
 
