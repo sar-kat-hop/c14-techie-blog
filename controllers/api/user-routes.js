@@ -3,9 +3,10 @@ const { User } = require('../../models');
 
 router.post('/login', async (req, res) => {
     try {
-        // look for email in db
+        // look for user's email in db
         const userData = await User.findOne({ where: {email: req.body.email} });
 
+        // if user's email not found...
         if(!userData) {
             res
                 .status(400)
@@ -13,17 +14,16 @@ router.post('/login', async (req, res) => {
             return;
         }
     
-        // verify password based on password saved in db
+        // verify password entered matches what's saved in db
         const passVerified = await userData.checkPassword(req.body.password);
 
+        // if password can't be verified...
         if(!passVerified) {
-            res 
-                .status(400)
-                .json({message: 'Password incorrect. Please try again.'});
+            res .status(400).json({message: 'Password incorrect. Please try again.'});
             return;
         }
 
-        // create session var for user logged in
+        // create session for logged-in user
         req.session.save(() => {
             req.session.user_id = userData.id;
             req.session.logged_in = true;
