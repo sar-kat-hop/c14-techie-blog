@@ -14,23 +14,22 @@ const loginFormHandler = async (event) => {
         });
 
         if (!userData) {
-            res
-                .status(400)
-                .json({ message: 'Incorrect email or password. Please try again.' });
-                return;
+            res.status(400).json({ message: 'Incorrect email or password: please try again.' });
+            return;
         };
 
-        const validPassword = await dbUserData.checkPassword(req.body.password);
+        const validPassword = await userData.checkPassword(req.body.password);
             if (!validPassword) {
-                res.status(400).json({ message: 'Incorrect password. Please try again.' });
+                res.status(400).json({ message: 'Incorrect password: please try again.' });
                 return;
         }
 
         req.session.save(() => {
             req.session.logged_in = true;
-
             res.status(200).json({ user: userData, message: 'Login successful' });
         });
+
+        document.location.replace('/'); // best place to put this? not sure if this will redirect only on user auth or not...
     };
 
 document.querySelector('#login-btn').addEventListener('click', loginFormHandler);
@@ -39,10 +38,10 @@ document.querySelector('#login-btn').addEventListener('click', loginFormHandler)
 
 //     if (email && password) {
 //       // Send email & password to server
-//         const response = await fetch('/api/login', { // not sure if this routing is correct... /api/users/login , /api/login, or what?
+//         const response = await fetch('/api/login', { // not sure if this routing is correct... /api/users/login , /api/login, or what? 
 //             method: 'POST',
 //             body: JSON.stringify({ email, password }),
-//             headers: { 'Content-Type': 'application/json' },
+//             headers: { 'Content-Type': 'application/json' }, // causing MIME type error in Chrome? (not fetching json user data? change to fetch another path? unsure how to point to userData.json)
 //         });
 
 //         if (response.ok) {
@@ -53,10 +52,6 @@ document.querySelector('#login-btn').addEventListener('click', loginFormHandler)
 //     }
 // };
 
-// document
-//     .querySelector('#login-form')
-    // .addEventListener('submit', loginFormHandler);
-
-// loginBtn.addEventListener('click', loginFormHandler);
+// document.querySelector('#login-form').addEventListener('click', loginFormHandler);
 // }
 
