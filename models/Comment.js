@@ -19,18 +19,11 @@ Comment.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
-        // user_id: {
-        //     type: DataTypes.INTEGER,
-        //     references: {
-        //         model: 'user',
-        //         key: 'id',
-        //     },
-        // },
-        user_name: {
-            type: DataTypes.STRING,
+        poster: {
+            type: DataTypes.INTEGER,
             references: {
                 model: 'user',
-                key: 'name',
+                key: 'id',
             },
         },
         date_created: {

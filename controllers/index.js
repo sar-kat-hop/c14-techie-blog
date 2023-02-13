@@ -1,9 +1,9 @@
 const router = require('express').Router();
 
-const apiRoutes = require('./api'); //user-routes is in /api folder
 const homeRoutes = require ('./home-routes');
+const apiRoutes = require('./api'); //user-routes and comment-routes are in /api folder
 
-router.use('/api', apiRoutes);
 router.use('/', homeRoutes);
+router.use('/api', apiRoutes);
 
 module.exports = router;
