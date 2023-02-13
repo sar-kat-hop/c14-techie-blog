@@ -19,7 +19,7 @@ Comment.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
-        user: {
+        poster: {
             type: DataTypes.INTEGER,
             references: {
                 model: 'user',

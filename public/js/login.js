@@ -21,7 +21,7 @@ const loginFormHandler = async (event) => {
     }
 };
 
-document.querySelector('#login-btn').addEventListener('click', loginFormHandler);
+document.querySelector('#login-btn').addEventListener('click', loginFormHandler); // change 'clicl' to 'submit'?
 
 //     const email = document.querySelector('#login-email').value.trim();
 //     const password = document.querySelector('#login-password').value.trim();
