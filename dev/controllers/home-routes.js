@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Comment } = require('../models');
+const { User, Comment } = require('../../models');
 // const userAuth = require('../utils/auth');
 
 // very basic routing for testing

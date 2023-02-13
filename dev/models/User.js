@@ -1,4 +1,4 @@
-const sequelize = require('../config/connection');
+const sequelize = require('../dev/config/connection');
 const bcrypt = require('bcrypt');
 const { Model, DataTypes } = require('sequelize');
 
