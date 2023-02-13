@@ -3,6 +3,7 @@ require('dotenv').config();
 
 let sequelize;
 
+// for heroku setup
 if (process.env.JAWSDB_URL) {
     sequelize = new Sequelize(process.env.JAWSDB_URL);
 } else {
