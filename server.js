@@ -12,7 +12,12 @@ const PORT = process.env.PORT || 3001;
 
 const userSess = {
     secret: 'classified and restricted supersecret',
-    cookie: {},
+    cookie: {
+        maxAge: 60 * 60 * 1000,
+        httpOnly: true,
+        secure: false,
+        sameSite: "strict",
+    },
     resave: false,
     saveUninitialized: true,
     store: new SequelizeStore({ db: sequelize })
