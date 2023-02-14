@@ -1,6 +1,6 @@
 const logout = async () => {
     // remove session on backend
-    const response = await fetch('/api/logout', {
+    const response = await fetch('/api/users/logout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
     });
@@ -9,6 +9,7 @@ const logout = async () => {
       // send to login page on successful logout    
         document.location.replace('/login');
         // document.location = '/'; 
+        alert('You have logged out.');
     } else {
         alert(response.statusText);
         console.log('Error logging out');
@@ -16,18 +17,3 @@ const logout = async () => {
 };
 
 document.querySelector('#logout-btn').addEventListener('click', logout);
-
-
-// const logout = async () => {
-//     const response = await fetch("/api/users/logout", {
-//       method: "POST",
-//       headers: { "Content-Type": "application/json" },
-//     });
-  
-//     if (response.ok) {
-//       document.location = "/";
-//     } else {
-//       alert("Failed to log out.");
-//     }
-//   };
-// const logoutBtn = document.querySelector('#logout-btn).click(logout);
