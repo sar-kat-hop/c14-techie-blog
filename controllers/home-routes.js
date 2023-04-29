@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Comment } = require('../../models');
+const { User, Comment } = require('../models');
 // const userAuth = require('../utils/auth');
 
 // very basic routing for testing
@@ -37,14 +37,14 @@ router.get('/', async (req, res) => {
         }
 });
 
-// router.get('/login', (req, res) => {
-//     // if there's already active session, send req to homepage
-//     if (req.session.logged_in) {
-//         res.redirect('/');
-//         return;
-//     }
-//     // if not logged in, render login view
-//     res.render('login');
-// });
+router.get('/login', (req, res) => {
+    // if there's already active session, send req to homepage
+    if (req.session.logged_in) {
+        res.redirect('/');
+        return;
+    }
+    // if not logged in, render login view
+    res.render('login');
+});
 
 module.exports = router;

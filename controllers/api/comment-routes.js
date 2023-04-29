@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Comment, User } = require('../../../models');
+const { Comment, User } = require('../../models');
 
 router.get('/', async (req, res) => {
     try {
@@ -36,22 +36,6 @@ router.get('/:id', async (req, res) => {
         console.log(err);
     }
 });
-
-// // create new comment
-// router.post('/', async (req, res) => {
-//     try {
-//         const newComment = await Comment.create({
-//             ...req.body,
-//             user_id: req.session.user_id,
-//         });
-
-//         res.status(200).json(newComment);
-
-//     } catch (err) {
-//         res.status(400).json(err);
-//         console.log('Error creating new comment');
-//     }
-// });
 
 // // delete comment
 // router.delete('/:id', async (req, res) => {
