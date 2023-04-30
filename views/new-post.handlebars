@@ -1,0 +1,16 @@
+{{!-- input group/form for making a new post --}}
+    <div class="container-fluid">
+        <h1 class="display-6 text-center"> Create a Post </h1>
+        <div class="d-flex align-items-center flex-column bd-highlight" id="posts">
+            <div class="form-floating mb-2">
+                <input type="text" class="form-control" id="title" placeholder="give your post a title">
+                <label for="floatingInput"> title </label>
+            </div>
+            <div class="form-floating">
+                <textarea class="form-control" placeholder="What's on your mind?" id="floatingTextarea" style="height: 100px" value="{{newPost.content}}">{{newPost.content}}</textarea>
+                <label for="floatingTextarea"> content </label>
+            </div>
+            <div class="form-group form-btn">
+                <button type="button" class="btn btn-info my-3">Post</button>
+            </div>            
+    </div>

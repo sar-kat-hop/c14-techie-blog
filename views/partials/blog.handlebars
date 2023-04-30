@@ -1,7 +1,4 @@
 {{!-- loop over each post --}}
-    <div class="container-fluid">
-        <h1 class="display-6 text-center"> Recent Posts </h1>
-        <div class="d-flex align-items-center flex-column bd-highlight" id="posts-container">
             {{#each blogPosts as |blogPost| }}
             <div class="p-2 bd-highlight">
                 <div class="card-body">
@@ -14,8 +11,6 @@
                 </div>                        
             </div>
             {{/each}}
-        </div>
-    </div>
 
 
 
