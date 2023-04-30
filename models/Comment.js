@@ -19,14 +19,14 @@ Comment.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
-        poster: {
+        user_id: {
             type: DataTypes.INTEGER,
             references: {
                 model: 'user',
                 key: 'id',
             },
         },
-        date_created: {
+        dateCreated: {
             type: DataTypes.DATE,
             allowNull: false,
             defaultValue: DataTypes.NOW,

@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { BlogPost } = require('../../models');
 const { userAuth } = require('../../utils/auth');
 
-//fetch blog posts
+//fetch all blog posts
 router.get('/', async (req, res) => {
     try {
         const postData = await BlogPost.findAll();
