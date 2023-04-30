@@ -1,0 +1,11 @@
+    <div class="container-fluid" id="dashboard-container">
+        <h1 class="display-6 text-center fst-italic"> {{user.username}} </h1>
+            <p class="lead text-center"> Dashboard </p>
+        <hr class="my-1">
+            <div class="d-flex flex-column align-items-center text-center">
+                <button type="button" class="btn btn-info my-3">Create New Post</button>
+                {{> user-posts }}
+            </div>
+    </div>
+
+    <script src="../public/js/dashboard.js"></script>

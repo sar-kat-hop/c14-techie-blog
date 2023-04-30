@@ -3,7 +3,7 @@ require('dotenv').config();
 
 let sequelize;
 
-// for heroku setup
+// for heroku setup, JAWSDB needed
 if (process.env.JAWSDB_URL) {
     sequelize = new Sequelize(process.env.JAWSDB_URL);
 } else {
@@ -14,7 +14,7 @@ if (process.env.JAWSDB_URL) {
         {
             host: 'localhost',
             dialect: 'mysql',
-            port: 3306
+            port: 3306,
         }   
     );
 }
