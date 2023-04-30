@@ -1,107 +1,105 @@
-const router = require('express').Router();
-const { User, Comment } = require('../../models');
+const router = require("express").Router();
+const { User } = require("../../models");
 
-router.get('/', async (req, res) => {
+// Login
+router.post("/login", async (req, res) => {
     try {
-        const userData = await User.findAll({
-            include: [
-                {model: Comment, attributes: ['title', 'body', 'date_created']}
-            ],
-            order: ['date_created', 'DESC'],
-        });
+        const userData = await User.findOne({
+            where: {
+                email: req.body.email,
+                },
+            });
 
-        res.status(200).json(userData);
-    } catch (err) {
-        res.status(500).json(err);
-        console.log(err);
-    }
-});
-
-router.get('/:id', async(req, res) => {
-    try {
-        const userData = User.findByPk(req.params.id, {
-            include: [
-                {model: Comment, attributes: ['title', 'body', 'date_created']}
-            ],
-            order: ['date_created', 'DESC'],
-        });
-
-        if(!userData) {
-            res.status(404).json({message: 'Could not find user (ID does not exist)'});
+        if (!userData) {
+            res.status(400).json({ message: "Email invalid. Please check your spelling and try again." });
             return;
         }
 
-        res.status(200).json(userData);
-    } catch(err) {
-        res.status(500).json(err);
-        console.log(err);
-    }
-});
+        const passwordValid = await userData.checkPassword(req.body.password);
 
-// login
-router.post('/login', async (req, res) => {
-    try {
-        // look for user's email in db
-        const userData = await User.findOne({ where: {email: req.body.email} });
-
-        // if user's email not found...
-        if(!userData) {
-            res
-                .status(400)
-                .json({ message: 'Email not found. Please try again.' });
-            return;
-        }
-    
-        // verify password entered matches what's saved in db
-        const passVerified = await userData.checkPassword(req.body.password);
-
-        // if password can't be verified...
-        if(!passVerified) {
-            res .status(400).json({message: 'Password incorrect. Please try again.'});
+        if (!passwordValid) {
+            res.status(400).json({ message: 'Password invalid. Please check your spelling and try again.' });
             return;
         }
 
-        // create session for logged-in user
         req.session.save(() => {
-            req.session.user_id = userData.id;
             req.session.logged_in = true;
+            req.session.user_id = userData.id;
 
-            req.json({ user: userData, message: 'Login successful.'});
+            res.json({ user: userData, message: "Logged in successfully." });
+
+            console.log("Login successful.");
         });
 
-    } catch (err) {
-        res.status(400).json(err);
-        console.log(err);
-    }
+        } catch (err) {
+            res.status(500).json(err);
+
+            console.log('\n Could not log in: ' + err + '\n');
+        }
 });
 
-// logout
-router.post('/logout', (req, res) => {
-    if(req.session.logged_in) {
-        // remove session vars
+// Logout
+router.post("/logout", (req, res) => {
+    if (req.session.loggedIn) {
+        console.log('\n Logging out. \n');
+
         req.session.destroy(() => {
             res.status(204).end();
         });
+
     } else {
         res.status(404).end();
-        console.log('Error logging out');
     }
 });
 
 // create new user
-// router.post('/', async (req, res) => {
-//     try {
-//         const userData = await User.create(req.body);
+router.post('/', async (req, res) => {
+    try {
+        const userData = await User.create({
+            email: req.body.email,
+            password: req.body.password,
+            username: req.body.username,
+        });
 
-//         req.session.save(() => {
-//             req.session.user_id = userData.id;
-//             req.session.logged_in = true;
+        req.session.save(() => {
+            req.session.user_id = userData.id;
+            req.session.logged_in = true;
 
-//             res.status(200).json(userData);
-//         });
-//     } catch (err) {
-//         res.status(400).json(err);
-//     }
-// });
+            res.status(200).json(userData);
+        });
+
+    } catch (err) {
+        res.status(400).json(err);
+    }
+});
+
+//delete user
+router.delete('/:id', userAuth, async (req, res) => {
+    const userId = req.params.id;
+
+    if(req.session.logged_in = true && userId == req.session.user_id) {
+        try {
+            const user = User.findOne(userId);
+            const deletedUser = await User.destroy({
+                where: { id: userId },
+                returning: true
+            });
+
+            res.status(200).json(deletedUser);
+
+            console.log('\n Deleted user: ' + deletedUser.username + '\n');
+
+        } catch (err) {
+            res.status(500).json({ error: 'Cannot delete user.'}, err);
+
+            console.log('\n Error deleting user: ' + err + '\n');
+        }
+    } else {
+        res.status(401).json({ message: 'You must be logged in to delete your account.'});
+        res.render('login');
+
+        console.log('\n User must be logged in to delete their account and can only delete their own account. \n');
+    }
+});
 
 module.exports = router;
