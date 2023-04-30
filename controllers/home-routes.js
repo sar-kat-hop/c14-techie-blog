@@ -47,29 +47,4 @@ router.get('/', async (req, res) => {
     }
 });
 
-//get single post
-router.get('/:id', userAuth, async (req, res) => {
-    try {
-        const blogPost = await BlogPost.findOne({
-            where: { id: req.params.id },
-            include: [
-                User, { model: Comment, include: [User] },
-            ],
-        });
-
-        if(!blogPost) {
-            console.log('\n Post not found. Id may not exist or user is not logged in. \n');
-            res.status(401).json({ message: '\n Blog post not found: ', err})
-        }
-
-        const postData = blogPost.get({ plain: true });
-        res.render('blog-post', {
-            loggedIn: req.session.loggedIn,
-            postData,
-        });
-
-    } catch (err) {
-        console.log('\n Error getting single blog post data: ' + err + '\n');
-        res.status(500).json({ message: '\n Post data not found (home-routes, ln57)', err});
-    }
-});
+module.exports = router;
