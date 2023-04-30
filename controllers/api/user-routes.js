@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { User, Comment } = require("../../models");
+const { User, BlogPost, Comment } = require("../../models");
 
 // Login
 router.post("/login", async (req, res) => {
@@ -64,25 +64,25 @@ router.post('/', async (req, res) => {
     }
 });
 
-// Create new post
-router.post("/comment", async (req, res) => {
-    try {
-        const commentData = await Comment.create({
-            user_id: req.session.userID,
-            title: req.body.title,
-            body: req.body.body,
-            date_created: req.session.date_created,
-        });
+// // Create new post
+// router.post("/comment", async (req, res) => {
+//     try {
+//         const commentData = await Comment.create({
+//             user_id: req.session.userID,
+//             title: req.body.title,
+//             body: req.body.body,
+//             date_created: req.session.date_created,
+//         });
 
-        if (!req.session.logged_in) {
-            res.status(400).json({ message: "Could not post comment." });
-            console.log('Failed to post comment.');
-        }
+//         if (!req.session.logged_in) {
+//             res.status(400).json({ message: "Could not post comment." });
+//             console.log('Failed to post comment.');
+//         }
 
-        res.status(200).json(commentData);
-    } catch (err) {
-        res.status(500).json(err);
-    }
-});
+//         res.status(200).json(commentData);
+//     } catch (err) {
+//         res.status(500).json(err);
+//     }
+// });
 
 module.exports = router;
