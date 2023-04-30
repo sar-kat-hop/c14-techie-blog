@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { BlogPost } = require('../../models');
 const { userAuth } = require('../../utils/auth');
+const Sequelize = require('sequelize'); //for Sequelize.NOW method
 
 //fetch all blog posts
 router.get('/', async (req, res) => {
@@ -91,7 +92,7 @@ router.put('/:id', userAuth, async(req, res) => {
 router.delete('/:id', userAuth, async (req, res) => {
     try {
         const deletedPost = await BlogPost.destroy({ where: { id: req.params.id }, returning: true });
-        res.status(200).json({ message: 'Deleted post: '}, deletedPost.id, deletedPost.title);
+        res.status(200).json({ message: 'Deleted post.'});
         res.send('/dashboard'); 
 
         console.log('\n Deleted blog post, ID: ' + deletedPost.id + ', title: ' + deletedPost.title);
