@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Blog</title>
+    <link rel="stylesheet" href="/css/jass.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"></head>
+
+<body>
+    <div class="navbar navbar-expand-xl navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand display-5" href="/">The Tech Blog</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarBasic" aria-controls="navbarBasic" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse show" id="navbarBasic">
+                <ul class="navbar-nav me-auto mb-2 mb-xl-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id='dashboard' href="/dashboard">Dashboard</a>
+                    </li>
+                    <!-- {{ #if loggedIn }} -->
+                    <li class="nav-item">
+                        <a class="nav-link" id="logout" href="/logout">Logout</a>
+                    </li>
+                    <!-- {{ else }} -->
+                    <li class="nav-item">
+                        <a class="nav-link" id="login" href="/login">Login</a>
+                    </li>
+                    <!-- {{/if}} -->
+                </ul>
+                <!-- <span class="navbar-text">
+                </span>             -->
+            </div>
+        </div>
+    </div>
+
+    <hr class="my-2">
+
+    <!-- <div class="container-fluid">
+        <h1 class="display-6 text-center"> Create a Post </h1>
+        <div class="d-flex align-items-center flex-column bd-highlight" id="posts">
+            <div class="form-floating mb-2">
+                <input type="text" class="form-control" id="title" placeholder="give your post a title">
+                <label for="floatingInput"> title </label>
+            </div>
+            <div class="form-floating">
+                <textarea class="form-control" placeholder="What's on your mind?" id="floatingTextarea" style="height: 100px" value="{{newPost.content}}">{{newPost.content}}</textarea>
+                <label for="floatingTextarea"> content </label>
+            </div>
+            <div class="form-group form-btn">
+                <button type="button" class="btn btn-info my-3">Post</button>
+            </div>             -->
+
+            <!-- <div class="input-group">
+                <span class="input-group-text" id="input-group-left-example">Title</span>
+                <input type="text" class="form-control" placeholder="what's your post about?" aria-label="title" aria-describedby="input-group-left" value="{{newPost.title}}">
+            </div>
+            <div class="input-group">
+                <span class="input-group-text" id="post-content">Content</span>
+                <input type="text" class="form-control" placeholder="what's on your mind?" aria-label="content" aria-describedby="input-group-left" value="{{newPost.content}}">
+            </div>
+            <div class="input-group">
+                <div class="d-flex align-items-center">
+                    <button type="button" class="btn btn-outline-info">Submit</button>
+                </div>
+            </div> -->
+            <!-- <div class="p-2 bd-highlight">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{BlogPosts.title}}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{BlogPosts.User.username}}</h6>
+                        <p class="card-text">{{BlogPosts.content}}</p>
+                    </div>
+                        <div class="card-footer text-muted">
+                            {{BlogPosts.dateCreated}}
+                        </div>                        
+                </div>
+            </div> -->
+        </div>
+    </div>
+    <!-- <div class="container-fluid" id="dashboard-container">
+        <h1 class="display-6 text-center fst-italic"> {{user.username}} </h1>
+            <p class="lead text-center"> Dashboard </p>
+        <hr class="my-1">
+            <div class="d-flex flex-column align-items-center text-center">
+                <button type="button" class="btn btn-info my-3">Create New Post</button>
+                {{> user-posts }}
+            </div>
+    </div> -->
+
+    <!-- <div class="d-flex flex-row align-items-center"> -->
+    <!-- </div> -->
+
+    <!-- <div class="d-flex flex-column align-items-center text-center">
+        <div class="p-2 bd-highlight">
+            <div class="card-body">
+                <h5 class="card-title">{{userPosts.title}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{userPosts.User.username}}</h6>
+                    <p class="card-text">{{userPosts.content}}</p>
+            </div>
+            <div class="card-footer text-muted">
+                {{userPosts.dateCreated}}
+            </div>                        
+        </div>
+    
+    </div>
+-->
+
+    <!-- show logout script only if user is still logged in -->
+    <!-- {{#if logged_in}} -->
+    <!-- <script src="../../public/js/logout.js"></script> -->
+    <!-- {{/if}} -->
+
+    <!-- {{!-- <script src="../../public/js/login.js"></script> {{! testing whether adding this resolves logging in issue}} --}}
+    {{!-- <script src="../public/js/logout.js"></script> --}} -->
+    
+</body>
+
+</html>
