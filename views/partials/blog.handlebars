@@ -1,0 +1,21 @@
+{{!-- loop over each post --}}
+    <div class="container-fluid">
+        <h1 class="display-6 text-center"> Recent Posts </h1>
+        <div class="d-flex align-items-center flex-column bd-highlight" id="posts-container">
+            {{#each blogPosts as |blogPost| }}
+            <div class="p-2 bd-highlight">
+                <div class="card-body">
+                    <h5 class="card-title">{{blogPosts.title}}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{blogPosts.User.username}}</h6>
+                        <p class="card-text">{{blogPosts.content}}</p>
+                </div>
+                <div class="card-footer text-muted">
+                    {{blogPosts.dateCreated}}
+                </div>                        
+            </div>
+            {{/each}}
+        </div>
+    </div>
+
+
+
