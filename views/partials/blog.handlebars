@@ -1,4 +1,5 @@
-{{!-- loop over each post --}}
+{{!-- loop over every post --}}
+{{!-- this should display on homepage --}}
             {{#each blogPosts as |blogPost| }}
             <div class="p-2 bd-highlight">
                 <div class="card-body">
@@ -11,6 +12,11 @@
                 </div>                        
             </div>
             {{/each}}
+            {{#if !blogPosts}}
+            <div class="container-fluid">
+                <h1 class="display-6">No posts!</h1>
+            </div>
+            {{/if}}
 
 
 
