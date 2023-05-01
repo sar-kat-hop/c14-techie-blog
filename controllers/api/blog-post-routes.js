@@ -19,34 +19,34 @@ router.get('/', async (req, res) => {
 });
 
 //fetch single blog post
-router.get('/:id', userAuth, async (req, res) => {
-    try {
-        const blogPost = await BlogPost.findOne({
-            where: { id: req.params.id },
-            include: [
-                User, { model: Comment, include: [User] },
-            ],
-            returning: true
-        });
+// router.get('/:id', userAuth, async (req, res) => {
+//     try {
+//         const blogPost = await BlogPost.findOne({
+//             where: { id: req.params.id },
+//             include: [
+//                 User, { model: Comment, include: [User] },
+//             ],
+//             returning: true
+//         });
 
-        if(!blogPost) {
-            res.status(401).json({ message: '\n Blog post not found: ', err})
+//         if(!blogPost) {
+//             res.status(401).json({ message: '\n Blog post not found: ', err})
 
-            console.log('\n Post not found. Id may not exist or user is not logged in. \n');
-        }
+//             console.log('\n Post not found. Id may not exist or user is not logged in. \n');
+//         }
 
-        const postData = blogPost.get({ plain: true });
-        res.render('blog-post', {
-            loggedIn: req.session.loggedIn,
-            postData,
-        });
+//         const postData = blogPost.get({ plain: true });
+//         res.render('blog-post', {
+//             loggedIn: req.session.loggedIn,
+//             postData,
+//         });
 
-    } catch (err) {
-        res.status(500).json({ message: '\n Post data not found: ', err});
+//     } catch (err) {
+//         res.status(500).json({ message: '\n Post data not found: ', err});
 
-        console.log('\n Error getting single blog post data: ' + err + '\n');
-    }
-});
+//         console.log('\n Error getting single blog post data: ' + err + '\n');
+//     }
+// });
 
 //create blog post
 router.post('/', userAuth, async (req, res) => {
@@ -54,7 +54,7 @@ router.post('/', userAuth, async (req, res) => {
         const { title, content } = req.body;
         const newPost = await BlogPost.create(req.body, {
             user_id: req.session.user_id,
-            dateCreated: Sequelize.Now,
+            dateCreated: Sequelize.NOW,
             returning: true
         });
 

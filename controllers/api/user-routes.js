@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const { User } = require("../../models");
+const { userAuth } = require('../../utils/auth');
 
 // Login
 router.post("/login", async (req, res) => {
@@ -74,32 +75,32 @@ router.post('/', async (req, res) => {
 });
 
 //delete user
-router.delete('/:id', userAuth, async (req, res) => {
-    const userId = req.params.id;
+// router.delete('/:id', userAuth, async (req, res) => {
+//     const userId = req.params.id;
 
-    if(req.session.logged_in = true && userId == req.session.user_id) {
-        try {
-            const user = User.findOne(userId);
-            const deletedUser = await User.destroy({
-                where: { id: userId },
-                returning: true
-            });
+//     if(req.session.logged_in = true && userId == req.session.user_id) {
+//         try {
+//             const user = User.findOne(userId);
+//             const deletedUser = await User.destroy({
+//                 where: { id: userId },
+//                 returning: true
+//             });
 
-            res.status(200).json(deletedUser);
+//             res.status(200).json(deletedUser);
 
-            console.log('\n Deleted user: ' + deletedUser.username + '\n');
+//             console.log('\n Deleted user: ' + deletedUser.username + '\n');
 
-        } catch (err) {
-            res.status(500).json({ error: 'Cannot delete user.'}, err);
+//         } catch (err) {
+//             res.status(500).json({ error: 'Cannot delete user.'}, err);
 
-            console.log('\n Error deleting user: ' + err + '\n');
-        }
-    } else {
-        res.status(401).json({ message: 'You must be logged in to delete your account.'});
-        res.render('login');
+//             console.log('\n Error deleting user: ' + err + '\n');
+//         }
+//     } else {
+//         res.status(401).json({ message: 'You must be logged in to delete your account.'});
+//         res.render('login');
 
-        console.log('\n User must be logged in to delete their account and can only delete their own account. \n');
-    }
-});
+//         console.log('\n User must be logged in to delete their account and can only delete their own account. \n');
+//     }
+// });
 
 module.exports = router;

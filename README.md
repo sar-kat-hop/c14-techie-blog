@@ -10,9 +10,7 @@ The database and seeds are functional. Getting and rendering the seeded comments
 
 ## Installation
 
-Please note that ss of 2/12, the deployments aren't working. Better results may be possible with local testing. 
-
-Click on the links under the Environments section on the right side of the page to visit the GitHub Pages and Heroku deployments (once functional).
+Please note that as of 2/12, the deployments aren't working. Better results may be possible with local testing. 
 
 ## Screenshots
 
